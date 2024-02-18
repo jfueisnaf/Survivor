@@ -37,5 +37,5 @@ public:
 	float minMovement;
 
 private:
-	class ABullet* Bullet;
+	UClass* GeneratedClass;
 };

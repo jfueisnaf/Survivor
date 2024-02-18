@@ -5,7 +5,6 @@
 
 #include "Bullet.h"
 #include "PaperSpriteComponent.h"
-#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -18,14 +17,21 @@ ASurvivorPlane::ASurvivorPlane()
 	PaperSpriteComponent->SetupAttachment(RootComponent);
 
 	movementSpeed = 1.f;
+
+	//Load Bullet Buleprint
+	static ConstructorHelpers::FObjectFinder<UBlueprint>FindObject(TEXT("Blueprint'/Game/Blueprint/BP_Bullet.BP_Bullet'"));
+	if (FindObject.Object)
+	{
+		GeneratedClass = FindObject.Object->GeneratedClass;
+	}
 }
 
 // Called when the game starts or when spawned
 void ASurvivorPlane::BeginPlay()
 {
 	Super::BeginPlay();
+
 	
-	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, FString(TEXT("Spawn Plane!")));
 }
 
 void ASurvivorPlane::MovementToX(float Value)
@@ -33,7 +39,6 @@ void ASurvivorPlane::MovementToX(float Value)
 	float movementValue = Value + GetActorLocation().Y;
 	FVector NewLocationVector = FVector(GetActorLocation().X, movementValue, GetActorLocation().Z);
 	SetActorLocation(NewLocationVector * movementSpeed);
-	
 }
 
 void ASurvivorPlane::FireAction()
