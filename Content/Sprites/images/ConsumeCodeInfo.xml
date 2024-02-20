@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<consumerCodeList>
+    <consumerCodeInfo>
+        <consumercode>000050259000</consumercode>
+        <consumerName>正版激活</consumerName>
+        <price>400</price>
+    </consumerCodeInfo>
+    <consumerCodeInfo>
+        <consumercode>000050259001</consumercode>
+        <consumerName>战队支援</consumerName>
+        <price>200</price>
+    </consumerCodeInfo>
+    <consumerCodeInfo>
+        <consumercode>000050259002</consumercode>
+        <consumerName>无限复活</consumerName>
+        <price>200</price>
+    </consumerCodeInfo>
+    <consumerCodeInfo>
+        <consumercode>000050259003</consumercode>
+        <consumerName>量子化</consumerName>
+        <price>200</price>
+    </consumerCodeInfo>
+    <consumerCodeInfo>
+        <consumercode>000050259004</consumercode>
+        <consumerName>20000水晶</consumerName>
+        <price>200</price>
+    </consumerCodeInfo>
+    <consumerCodeInfo>
+        <consumercode>000050259005</consumercode>
+        <consumerName>机甲战神</consumerName>
+        <price>200</price>
+    </consumerCodeInfo>
+</consumerCodeList>

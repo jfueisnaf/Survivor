@@ -31,9 +31,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UPaperSpriteComponent* PaperSpriteComponent;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UBoxComponent* BoxComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UProjectileMovementComponent* ProjectileMovementComponent;

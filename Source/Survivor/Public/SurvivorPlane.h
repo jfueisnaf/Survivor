@@ -36,6 +36,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float minMovement;
 
-private:
-	UClass* GeneratedClass;
+	UClass* localBullet;
 };

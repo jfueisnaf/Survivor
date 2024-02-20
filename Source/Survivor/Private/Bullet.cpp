@@ -4,6 +4,7 @@
 #include "Bullet.h"
 
 #include "PaperSpriteComponent.h"
+#include "PaperSprite.h"
 #include "SurvivorCharacter.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
@@ -17,26 +18,36 @@ ABullet::ABullet()
 	PrimaryActorTick.bCanEverTick = true;
 
 	PaperSpriteComponent = CreateDefaultSubobject<UPaperSpriteComponent>("PaperSprite");
-	PaperSpriteComponent->SetupAttachment(RootComponent);
-	
-	BoxComponent = CreateDefaultSubobject<UBoxComponent>("BoxComponent");
-	BoxComponent->SetupAttachment(RootComponent);
+	SetRootComponent(PaperSpriteComponent);
+	PaperSpriteComponent->SetWorldScale3D(FVector(0.2,0.2,0.2));
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>("Projectile");
 	ProjectileMovementComponent->SetUpdatedComponent(RootComponent);
+	
+
+	//初始化组件属性
+	ProjectileMovementComponent->ProjectileGravityScale = 0;
+	ProjectileMovementComponent->InitialSpeed = 800;
+	ProjectileMovementComponent->Velocity = FVector(0,0,1);
+	ProjectileMovementComponent->Activate(true);
+
+	//load PaperSprite Assets
+	static ConstructorHelpers::FObjectFinder<UPaperSprite>Sprite(TEXT("PaperSprite'/Game/Sprites/images/Bullet.Bullet'"));
+	if (Sprite.Object)
+	{
+		PaperSpriteComponent->SetSprite(Sprite.Object);
+	}
 }
 
 // Called when the game starts or when spawned
 void ABullet::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	
 
-	const FLatentActionInfo LatentInfo(0, FMath::Rand(), TEXT("Destroy") , this); 
+	const FLatentActionInfo LatentInfo(0, FMath::Rand(), TEXT("DestroyActor") , this); 
 	UKismetSystemLibrary::Delay(this, 3.0f, LatentInfo);
-
-	BoxComponent->OnComponentBeginOverlap.AddDynamic(this, &ABullet::OnBeginOverlapEvent);
-
-	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Orange, TEXT("Spawn Bullet"));
 }
 
 void ABullet::DestroyActor()
@@ -57,5 +68,10 @@ void ABullet::OnBeginOverlapEvent(UPrimitiveComponent* OverlappedComponent, AAct
 void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	UE_LOG(LogTemp, Warning, TEXT("FStringFormatArg: %f"), GetActorLocation().Z);
+
+	//模拟子弹效果
+	SetActorLocation(FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 10));
 }
 

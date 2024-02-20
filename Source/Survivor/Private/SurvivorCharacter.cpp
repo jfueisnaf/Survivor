@@ -3,6 +3,7 @@
 
 #include "Survivor/Public/SurvivorCharacter.h"
 
+#include "Bullet.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerStart.h"
